@@ -10,6 +10,7 @@ if (process.env.NODE_ENV === 'development') {
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'export',
+  distDir: 'dist',
   eslint: {
     ignoreDuringBuilds: true, // Checking in "test:lint" script instead
   },
