@@ -1,9 +1,6 @@
 name: CI
 
 on:
-  pull_request:
-    branches:
-      - main
   push:
     branches:
       - main
@@ -18,7 +15,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
       - name: Set up Bun
-        uses: oven-sh/setup-bun@v1
+        uses: oven-sh/setup-bun@v2
       - name: Bun version
         run: bun --version
       - name: Install dependencies
@@ -34,15 +31,15 @@ jobs:
       - name: Build
         run: bun run build
       - name: Publish to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: displacementx
-          directory: out
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-      - name: Upload build artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: build
-          path: ./out
+      #     projectName: displacementx
+      #     directory: out
+      #     gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Upload build artifact
+      #   uses: actions/upload-artifact@v4
+      #   with:
+      #     name: build
+      #     path: ./out
